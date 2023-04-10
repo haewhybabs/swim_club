@@ -15,6 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('squad_id')->unsigned();
+            $table->foreign('squad_id')->references('id')->on('squad');
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->foreign('parent_id')->references('id')->on('users');
             $table->string('gender');
             $table->string('swimmer_type'); //adult or child
             $table->string('swimmer_status')->nullable();

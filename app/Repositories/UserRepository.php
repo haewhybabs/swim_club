@@ -13,6 +13,12 @@ class UserRepository
     {
         return User::find($id);
     }
+    public function findAllParents(){
+        return User::where('role_id',4)->get();
+    }
+    public function findAllCoaches(){
+        return User::where('role_id',2)->get();
+    }
     public function findByEmail($email){
         return User::where('email',$email)->first();
     }

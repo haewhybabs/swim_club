@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Repositories\UserRepository;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     protected $userRepository;
+    protected $userService;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     public function index(){
@@ -27,10 +27,10 @@ class LoginController extends Controller
             'message'=>'Invalid login details',
             'alert-type'=>'error'
         ];
-        $user = $this->userRepository->findByEmail($request->email);
+        $user = $this->userService->findByEmail($request->email);
         if($user){
             if(Auth::attempt($login)){
-                return redirect('/dashboard/index');
+                return redirect('/dashboard');
             }
         }
         return redirect()->back()->with($response);
@@ -49,10 +49,14 @@ class LoginController extends Controller
         ]);
         $register['role_id']=3;
         $register['password']=bcrypt($request->password);
-        $user = $this->userRepository->create($register);
+        $user = $this->userService->create($register);
         if($user){
-            return redirect('/');
+            return redirect('/')->with(['alert-type'=>'success','message'=>'Registration successful']);
         }
 
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
     }
 }

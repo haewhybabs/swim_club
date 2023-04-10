@@ -43,4 +43,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+    public function personalInfo(){
+        return $this->hasOne(PersonalInfo::class,'user_id','id');
+    }
+    public function swimmer(){
+        return $this->hasOne(Swimmer::class);
+    }
+    public function squad(){
+        return $this->hasOne(Squad::class,'coach_id','id');
+    }
+    public function parent(){
+        return $this->hasOne(Swimmer::class,'parent_id','id');
+    }
 }

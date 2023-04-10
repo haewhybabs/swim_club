@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('squad', function (Blueprint $table) {
             $table->increments('id');
             $table->string('squad_name');
-            $table->integer('coach_id')->unsigned();
+            $table->integer('coach_id')->unsigned()->nullable();
             $table->foreign('coach_id')->references('id')->on('users');
 
             $table->timestamps();

@@ -21,14 +21,14 @@
 
 <div class="content mt-3">
 
-    <div class="col-sm-12">
+    {{-- <div class="col-sm-12">
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="col-sm-6 col-lg-3">
@@ -37,7 +37,7 @@
                 <h4 class="mb-0">
                     <span class="count">10468</span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Swimmers</p>
 
                 <div class="chart-wrapper px-0" style="height:70px;" height="70">
                     <canvas id="widgetChart1"></canvas>
@@ -55,7 +55,7 @@
                 <h4 class="mb-0">
                     <span class="count">10468</span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Gala Events</p>
 
                 <div class="chart-wrapper px-0" style="height:70px;" height="70">
                     <canvas id="widgetChart2"></canvas>
@@ -72,7 +72,7 @@
                 <h4 class="mb-0">
                     <span class="count">10468</span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Parents</p>
 
             </div>
 
@@ -89,7 +89,7 @@
                 <h4 class="mb-0">
                     <span class="count">10468</span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Squads</p>
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">
                     <canvas id="widgetChart4"></canvas>
                 </div>

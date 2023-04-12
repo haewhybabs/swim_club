@@ -32,7 +32,7 @@ class PersonalInfoController extends Controller
             'address'=>'required',
             'dob'=>'required',
             'phone_number'=>'required',
-            'squad_id'=>'required'
+            // 'squad_id'=>'required'
         ]);
 
         $dob = $request->dob;

@@ -18,6 +18,11 @@ class SwimmerRepository
     {
         return Swimmer::where('user_id',$userId)->first();
     }
+
+    public function findByParentId($parentId)
+    {
+        return Swimmer::where('parent_id',$parentId)->first();
+    }
     public function create(array $data)
     {
         return Swimmer::create($data);
@@ -36,6 +41,10 @@ class SwimmerRepository
         $swimmer->parent_id = $parentId;
         $swimmer->update();
         return $swimmer;
+    }
+
+    public function findBySquadId($squadId){
+        return Swimmer::where('squad_id',$squadId)->get();
     }
 
     public function delete($id)

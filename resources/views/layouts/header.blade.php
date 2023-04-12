@@ -31,69 +31,141 @@
                 {{-- <a class="navbar-brand hidden" href="./">SWIMCLUB</a> --}}
             </div>
             <div id="main-menu" class="main-menu collapse navbar-collapse">
+                @php $roleId = auth()?->user()?->role_id @endphp
+                
+                {{-- Admin --}}
+                @if($roleId ==1) 
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="{{ URL::TO("dashboard") }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
+                        <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Personal Information</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-puzzle-piece"></i><a href="{{ URL::TO("load-info") }}">Update Info</a></li>
+                                <li><i class="fa fa-id-badge"></i><a href="{{ URL::TO("my-squad") }}">My squad</a></li>
+                                <li><i class="fa fa-share-square-o"></i><a href="{{ URL::TO("my-parent") }}">Parent</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Parent</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-parent") }}">Create Parent</a></li>
+                                {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Parents info</a></li> --}}
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Coach</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-coach") }}">Create Coach</a></li>
+                                {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Coach</a></li> --}}
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Squad</a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-squad") }}">Create Squad</a></li>
+                                {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Squad info</a></li> --}}
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('race-performance') }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                            
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('admin/gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
+                            
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ URL::TO("logout") }}"> <i class="menu-icon fa fa-table"></i>Logout</a>
+                        </li>
+
+                        
+
+                    </ul>
+
+                {{-- Coaches --}}
+                @elseif($roleId==2)
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="{{ URL::TO("dashboard") }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
+                        <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('my-squad') }}?coach=true"> <i class="menu-icon fa fa-table"></i>My Squad</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('race-performance') }}?coach=true"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('admin/gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
+                            
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ URL::TO("logout") }}"> <i class="menu-icon fa fa-table"></i>Logout</a>
+                        </li>
+
+                        
+
+                    </ul>
+                {{-- Swimmers --}}
+                @elseif($roleId==3)
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="{{ URL::TO("dashboard") }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        </li>
+                        <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
+            
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('load-info') }}"> <i class="menu-icon fa fa-table"></i>Personal Info</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('my-squad') }}"> <i class="menu-icon fa fa-table"></i>My Squad</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('my-parent') }}"> <i class="menu-icon fa fa-table"></i>My Parent</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a href="{{ URL::TO('race-performance') }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                            
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="{{ URL::TO("logout") }}"> <i class="menu-icon fa fa-table"></i>Logout</a>
+                        </li>
+
+                        
+
+                    </ul>
+                {{-- Parents --}}
+                @elseif($roleId==4)
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="{{ URL::TO("dashboard") }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Personal Information</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ URL::TO("load-info") }}">Update Info</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="{{ URL::TO("my-squad") }}">My squad</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="{{ URL::TO("my-parent") }}">Parent</a></li>
-                        </ul>
+
+                    <li class="menu-item">
+                        <a href="{{ URL::TO('load-info') }}?parent=true"> <i class="menu-icon fa fa-table"></i>Child Info</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Parent</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-parent") }}">Create Parent</a></li>
-                            {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Parents info</a></li> --}}
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Coach</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-coach") }}">Create Coach</a></li>
-                            {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Coach</a></li> --}}
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Squad</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="{{ URL::TO("admin/create-squad") }}">Create Squad</a></li>
-                            {{-- <li><i class="fa fa-table"></i><a href="tables-data.html">View Squad info</a></li> --}}
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Training Performance</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Create training info</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">View training info</a></li>
-                        </ul>
+                    <li class="menu-item">
+                        <a href="{{ URL::TO('my-parent') }}?parent=true"> <i class="menu-icon fa fa-table"></i>Parent Info</a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Gala Events</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Schedule Gala event</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">View Gala Events</a></li>
-                        </ul>
+                    <li class="menu-item">
+                        <a href="{{ URL::TO('my-squad') }}?parent={{ true }}"> <i class="menu-icon fa fa-table"></i>Child Squad</a>
                     </li>
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Gala Results</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">View Gala Results</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Update Gala Results</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Race Data</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Create Race Data</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">View Race Data</a></li>
-                        </ul>
+            
+                    <li class="menu-item">
+                        <a href="{{ URL::TO('race-performance') }}?parent={{ true }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                        
                     </li>
 
                     <li class="menu-item">
@@ -103,6 +175,9 @@
                     
 
                 </ul>
+                @endif
+
+
             </div>
         </nav>
     </aside>

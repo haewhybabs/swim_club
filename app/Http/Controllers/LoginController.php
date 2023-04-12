@@ -30,6 +30,14 @@ class LoginController extends Controller
         $user = $this->userService->findByEmail($request->email);
         if($user){
             if(Auth::attempt($login)){
+                if($user->role_id == 3){
+                    if(!$user->personalInfo){
+                        return redirect('/load-info')->with([
+                            'message'=>'Please update your account before accessing the dashboard',
+                            'alert-type'=>'info'
+                        ]);
+                    }
+                }
                 return redirect('/dashboard');
             }
         }

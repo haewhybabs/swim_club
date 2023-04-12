@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Stroke extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function racePerformance(){
+        return $this->hasMany(RacePerformance::class);
+    }
+
+    public function galaEvent(){
+        return $this->hasMany(GalaEvent::class);
+    }
 }

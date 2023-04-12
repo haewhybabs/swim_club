@@ -11,10 +11,10 @@ class Squad extends Model
     protected $table= 'squad';
     protected $fillable= ['squad_name','coach_id'];
 
-    public function squadDetails(){
-        return $this->hasMany(SquadDetails::class);
+    public function swimmers(){
+        return $this->hasMany(Swimmer::class);
     }
-    public function user(){
+    public function coach(){
         return $this->belongsTo(User::class,'coach_id','id');
     }
 }

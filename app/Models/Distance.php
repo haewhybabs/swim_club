@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Distance extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
+    public function racePerformance(){
+        return $this->hasMany(RacePerformance::class);
+    }
+
+    public function galaEvent(){
+        return $this->hasMany(GalaEvent::class);
+    }
 }

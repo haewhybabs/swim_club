@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'name'=>'swimmer User',
             'email'=>'swimmer@swimmer.com',
             'password'=>bcrypt('password'),
-            'role_id'=>4,
+            'role_id'=>3,
         ]);
         DB::table('users')->insert([
             'name'=>'Tempy Coach',

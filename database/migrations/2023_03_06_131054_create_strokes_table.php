@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('race_distance', function (Blueprint $table) {
+        Schema::create('strokes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('distance');
+            $table->string('name');
             $table->timestamps();
         });
     }

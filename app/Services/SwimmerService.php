@@ -24,6 +24,14 @@ class SwimmerService
         return $this->swimmerRepository->findByUserId($userId);
     }
 
+    public function findByParentId($parentId){
+        return $this->swimmerRepository->findByParentId($parentId);
+    }
+
+    public function findBySquadId($squadId){
+        return $this->swimmerRepository->findBySquadId($squadId);
+    }
+
     public function create(array $attributes)
     {
         // Add business logic here, if necessary

@@ -19,4 +19,7 @@ class Swimmer extends Model
     public function squad(){
         return $this->belongsTo(Squad::class,'squad_id','id');
     }
+    public function racePerformance(){
+        return $this->hasMany(RacePerformance::class,'swimmer_id','id');
+    }
 }

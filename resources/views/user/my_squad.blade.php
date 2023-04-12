@@ -4,7 +4,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>My Squad</h1>
+                <h1>{{ $swimmer?->squad?->squad_name }}</h1>
             </div>
         </div>
     </div>
@@ -25,25 +25,32 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Data Table</strong>
+                        <strong class="card-title">Coach: {{ $swimmer?->squad?->coach?->name }}</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>S/N</th>
                                     <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Salary</th>
+                                    <th>Gender</th>
+                                    <th>Swimmer Type</th>
+                                    <th>Membership ID</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Ayobami Babalola</td>
-                                    <td>Software Engineer</td>
-                                    <td>Ayobami Babalola</td>
-                                    <td>Ayobami Babalola</td>
-                                </tr>
+                                @php $x =1 @endphp
+                                @foreach ($squadSwimmers as $swimmer)
+                                    <tr>
+                                        <td>{{ $x }}</td>
+                                        <td>{{ $swimmer->user->name }}</td>
+                                        <td>{{ $swimmer->gender }}</td>
+                                        <td>{{ $swimmer->swimmer_type }}</td>
+                                        <td>{{ $swimmer->membership_id }}</td>
+                                    </tr>
+                                    @php $x++ @endphp
+                                @endforeach
+                               
                             </tbody>
                         </table>
                     </div>

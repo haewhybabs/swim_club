@@ -12,10 +12,12 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    @if(!$swimmer->parent)
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                       Create Parent
-                    </button>
+                    @if($swimmer)
+                        @if(!$swimmer->parent)
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Create Parent
+                        </button>
+                        @endif
                     @endif
 
                     
@@ -34,12 +36,15 @@
                         <strong class="card-title">Parent</strong>
                     </div>
                     <div class="card-body">
-                        
-                        @if(!$swimmer->parent)
-                         <p>Parent is yet to be created</p>
-                        @else
-                        <p>Name : {{ $swimmer?->parent?->name }}</p><br>
-                        <p>Email : {{ $swimmer?->parent?->email }}</p><br>
+                        @if($swimmer)
+
+                            @if($swimmer->parent)
+                                <p>Name : {{ $swimmer?->parent?->name }}</p><br>
+                                <p>Email : {{ $swimmer?->parent?->email }}</p><br>
+                            @else
+                                <p>Parent is yet to be created</p>
+                            @endif
+
                         @endif
                     </div>
                 </div>
@@ -91,6 +96,6 @@
     
         </div>
     </div>
-  </div>
+</div>
 @endsection
 

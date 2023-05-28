@@ -28,29 +28,29 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/create-parent', 'App\Http\Controllers\ParentController@createParent');
     Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
     Route::get('/race-performance', 'App\Http\Controllers\RacePerformanceController@viewPerformance');
+    Route::get('/gala-event','App\Http\Controllers\GalaEventController@viewEvent');
+    
+});
+
+Route::middleware(['role:admin,coaches'])->group(function () {
+    // specifically to admin and coaches go here
+    Route::get('/admin/dashboard', 'App\Http\Controllers\DashboardController@index');
     Route::post('/handle-create-performance', 'App\Http\Controllers\RacePerformanceController@handleCreatePerformance');
 });
 
-Route::middleware(['role:admin','role:coach'])->group(function () {
-    // specifically to admin goes here
-    Route::get('/admin/dashboard', 'App\Http\Controllers\DashboardController@index');
-});
-
-
-Route::middleware(['role:coach'])->group(function () {
-    // Authenticated routes go here
-    // Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
-});
 
 Route::middleware(['role:admin'])->group(function () {
+    //specifically for admin goes here
     Route::get('/admin/create-parent','App\Http\Controllers\ParentController@adminCreateParent');
     Route::get('/admin/create-coach','App\Http\Controllers\CoachController@loadCoaches');
     Route::post('/admin/handle-create-coach','App\Http\Controllers\CoachController@createCoach');
+    Route::post('/admin/handle-update-coach','App\Http\Controllers\CoachController@updateCoach');
+    Route::get('/admin/handle-delete-coach/{id}','App\Http\Controllers\CoachController@deleteCoach');
     Route::get('/admin/create-squad','App\Http\Controllers\SquadController@loadSquad');
     Route::post('/admin/handle-create-squad','App\Http\Controllers\SquadController@createSquad');
     Route::post('/admin/update-squad','App\Http\Controllers\SquadController@updateSquad');
-    Route::get('/admin/gala-event','App\Http\Controllers\GalaEventController@viewEvent');
     Route::post('/admin/handle-create-event','App\Http\Controllers\GalaEventController@createEvent');
+    // Route::post('/handle-create-performance', 'App\Http\Controllers\RacePerformanceController@handleCreatePerformance');
 
 });
 

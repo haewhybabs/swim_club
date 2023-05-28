@@ -22,6 +22,7 @@ class CheckRole
             return redirect('/login');
         }
         if (! in_array($user->role->name, $roles)) {
+            
             abort(403, 'Unauthorized action.');
         }
 

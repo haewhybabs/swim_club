@@ -11,9 +11,12 @@
     <div class="col-sm-8">
         <div class="page-header float-right">
             <div class="page-title">
+                @php $roleId = auth()->user()->role_id @endphp
+                @if($roleId==1 || $roleId ==2)
                 <ol class="breadcrumb text-right">
                     <a href="{{ URL::TO("create-performance") }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create Performance </a>
                 </ol>
+                @endif
             </div>
         </div>
     </div>
@@ -96,8 +99,8 @@
                     <div class="form-group">
                         <label>Select Race Type</label>
                         <select class="form-control" name="race_type" required>
-                            <option value="training">Training</option>
-                            <option value="training">Gala Event</option>
+                            <option value="Training">Training</option>
+                            <option value="Event">Gala Event</option>
                         </select>
                     </div>
 
@@ -173,7 +176,7 @@
             
                 
                     <div class="form-group">
-                        <label>Filter by Distance</label>
+                        <label>Filter by Distance (Optional)</label>
                         <select class="form-control" value="{{ $distanceFilter }}" name="distance_id_filter">
                             <option value="0">Select Distance</option>
                             @foreach($distances as $distance)
@@ -183,7 +186,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Filter by Stroke</label>
+                        <label>Filter by Stroke (Optional)</label>
                         <select class="form-control" name="stroke_id_filter" value="{{ $strokeFilter }}">
                             <option value="0">Select Stroke</option>
                             @foreach($strokes as $stroke)
@@ -194,11 +197,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Filter by Race Type</label>
+                        <label>Filter by Race Type (Optional)</label>
                         <select class="form-control" name="race_type_filter">
                             <option value="0">Select Race Type</option>
-                            <option value="training" {{ $raceTypeFilter=='training'?'selected':'' }}>Training</option>
-                            <option value="galaEvent" {{ $raceTypeFilter=='galaEvent'?'selected':'' }}>Gala Event</option>
+                            <option value="Training" {{ $raceTypeFilter=='Training'?'selected':'' }}>Training</option>
+                            <option value="Event" {{ $raceTypeFilter=='Event'?'selected':'' }}>Gala Event</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Filter by Gala Event (Optional)</label>
+                        <select class="form-control" name="gala_event_filter" value="{{ $galaEventFilter }}">
+                            <option value="0">Select Gala Event</option>
+                            @foreach($galaEvents as $event)
+                                <option value="{{ $event->id }}" {{ $galaEventFilter==$event->id?'selected':'' }}>{{ $event->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     

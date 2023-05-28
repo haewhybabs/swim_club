@@ -51,6 +51,7 @@
                         <option value="{{ $squad->id }}"  {{ $squad?->id == $swimmer?->squad_id ? 'selected' : '' }}>{{ $squad->squad_name }}</option>
                     @endforeach
                 </select>
+                <input type="hidden" name="user_id" value="{{ $userId }}" />
             </div>
             <button type="submit" class="btn btn-danger">Submit</button>
         </form>

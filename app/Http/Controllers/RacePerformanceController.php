@@ -30,11 +30,13 @@ class RacePerformanceController extends Controller
         $strokeFilter = $request->stroke_id_filter;
         $distanceFilter = $request->distance_id_filter;
         $raceTypeFilter = $request->race_type_filter;
+        $galaEventFilter = $request->gala_event_filter;
 
-        $coach = $request->coach;
+        $coach = auth()->user()->role_id ==2?true:false;
 
-        $parent = $request->parent;
+        $parent = auth()->user()->role_id ==4?true:false;
         
+        $isSwimmer =auth()->user()->role_id ==3?true:false;
 
         $query = RacePerformance::query();
 
@@ -48,6 +50,10 @@ class RacePerformanceController extends Controller
 
         if ($raceTypeFilter) {
             $query->where('race_type', $raceTypeFilter);
+        }
+
+        if($galaEventFilter){
+            $query->where('gala_event_id',$galaEventFilter);
         }
 
         $swimmers = $this->swimmerService->findAll();
@@ -68,7 +74,14 @@ class RacePerformanceController extends Controller
             //This will only fetch parent's child race performance
             $query->where('swimmer_id',$swimmer->id);
         }
+        if($isSwimmer){
+            $userId = auth()->user()->id;
+            $swimmer = $this->swimmerService->findByUserId($userId);
+            $query->where('swimmer_id',$swimmer->id);
+        }
         $performances = $query->get();
+
+        
 
         $strokes = Stroke::all();
         $distances = Distance::all();
@@ -79,7 +92,7 @@ class RacePerformanceController extends Controller
 
         return view('race.performance',compact(
             'performances','swimmers','strokes','distances','galaEvents',
-            'strokeFilter','distanceFilter','raceTypeFilter'
+            'strokeFilter','distanceFilter','raceTypeFilter','galaEventFilter'
         ));
     }
     public function handleCreatePerformance(Request $request){
@@ -91,19 +104,33 @@ class RacePerformanceController extends Controller
             'duration'=>'required',
         ]);
 
-        $squad = $this->swimmerService->findById($request->swimmer_id);
+        if($request->race_type=='Event'){
+            if(!$request->gala_event_id){
+                return redirect()->back()->with([
+                    'message'=>'Please select a gala event for an event type',
+                    'alert-type'=>'success'
+                ]);
+            }
 
+        }
+
+        $galaEventId = $request->race_type=='Training'?null:$request->gala_event_id;
+
+        $swimmer = $this->swimmerService->findById($request->swimmer_id);
+        ($swimmer->squad_id);
+        
         $create = $this->racePerformanceService->create([
             ...$validatedData,
-            'squad_id'=>$squad->id,
+            'squad_id'=>$swimmer->squad_id,
             'training_date'=>$request->training_date? date('Y-m-d H:i:s', strtotime($request->training_date)):null,
             'performance_score'=>$request->performance_score??null,
-            'gala_event_id'=>$request->gala_event_id??null,
+            'gala_event_id'=>$galaEventId
         ]);
 
         if($create){
             return redirect()->back()->with([
-                'Performace data created'
+                'message'=>'Performace data created',
+                'alert-type'=>'success'
             ]);
         }
     }

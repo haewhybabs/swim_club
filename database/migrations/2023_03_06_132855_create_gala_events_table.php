@@ -15,10 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->datetime('gala_date');
-            $table->integer('distance_id')->unsigned();
-            $table->foreign('distance_id')->references('id')->on('distances');
-            $table->integer('stroke_id')->nullable()->unsigned();
-            $table->foreign('stroke_id')->references('id')->on('strokes');
+            // $table->integer('distance_id')->unsigned();
+            // $table->foreign('distance_id')->references('id')->on('distances');
+            // $table->integer('stroke_id')->nullable()->unsigned();
+            // $table->foreign('stroke_id')->references('id')->on('strokes');
             $table->string('race_type')->nullable(); //adult or child
             $table->string('gender')->nullable();
             $table->string('location')->nullable();

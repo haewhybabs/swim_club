@@ -19,15 +19,21 @@ class PersonalInfoController extends Controller
         $this->swimmerService = $swimmerService;
         $this->squadService = $squadService;
     }
-    public function loadInfo(){
+    public function loadInfo(Request $request){
         $userId = auth()->user()->id;
+        $parent = auth()->user()->role_id ==4?true:false;
+        if($parent){
+            $swimmer = $this->swimmerService->findByParentId($userId);
+            $userId= $swimmer->user_id;
+        }
+        
         $personalInfo = $this->personalInfoService->findByUserId($userId);
         $swimmer = $this->swimmerService->findByUserId($userId);
         $squads = $this->squadService->findAll();
-        return view('user.personal_info',compact('personalInfo','swimmer','squads'));
+        return view('user.personal_info',compact('personalInfo','swimmer','squads','userId'));
     }
     public function saveUserInfo(Request $request){
-        $userId = auth()->user()->id;
+        $userId = $request->user_id;
         $validatedData = $request->validate([
             'address'=>'required',
             'dob'=>'required',
@@ -51,10 +57,14 @@ class PersonalInfoController extends Controller
             'membership_id'=>$membershipId,
             'squad_id'=>$request->squad_id
         ];
-        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['user_id'] = $userId;
         $personalInfo = $this->personalInfoService->findByUserId($userId);
         if($personalInfo){
             $info = $this->personalInfoService->update($validatedData,$personalInfo->id);
+            $swimmerInfo = [
+                'swimmer_type'=>$age>18?'adult':'child',
+            ];
+            $updateSwimmer = $this->swimmerService->updateByUserId($swimmerInfo,$userId);
         }
         else{
             $swimmer = $this->swimmerService->create($swimmerData);

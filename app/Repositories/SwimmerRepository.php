@@ -43,6 +43,13 @@ class SwimmerRepository
         return $swimmer;
     }
 
+    public function updateByUserId($attributes, $userId)
+    {
+        $swimmer = Swimmer::where('user_id',$userId)->first();
+        $swimmer->update($attributes);
+        return $swimmer;
+    }
+
     public function findBySquadId($squadId){
         return Swimmer::where('squad_id',$squadId)->get();
     }

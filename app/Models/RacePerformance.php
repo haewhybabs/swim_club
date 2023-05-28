@@ -9,7 +9,7 @@ class RacePerformance extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'swimmer_id','race_type','stroke_id','placement','location','duration','distance_id','training_date','performance_score','gala_event_id'
+        'swimmer_id','race_type', 'squad_id','stroke_id','placement','location','duration','distance_id','training_date','performance_score','gala_event_id'
     ];
 
     public function galaEvent(){

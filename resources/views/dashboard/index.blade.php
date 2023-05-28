@@ -35,7 +35,7 @@
         <div class="card text-white bg-flat-color-1">
             <div class="card-body pb-0">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{ $swimmers }}</span>
                 </h4>
                 <p class="text-light">Swimmers</p>
 
@@ -53,7 +53,7 @@
         <div class="card text-white bg-flat-color-2">
             <div class="card-body pb-0">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{ $galas }}</span>
                 </h4>
                 <p class="text-light">Gala Events</p>
 
@@ -70,7 +70,7 @@
         <div class="card text-white bg-flat-color-3">
             <div class="card-body pb-0">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{ $parents }}</span>
                 </h4>
                 <p class="text-light">Parents</p>
 
@@ -87,7 +87,7 @@
         <div class="card text-white bg-flat-color-4">
             <div class="card-body pb-0">
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count">{{ $squads }}</span>
                 </h4>
                 <p class="text-light">Squads</p>
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">

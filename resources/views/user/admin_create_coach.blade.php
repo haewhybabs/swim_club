@@ -48,7 +48,14 @@
                                         <td>{{ $coach->name }}</td>
                                         <td>{{ $coach->email }}</td>
                                         <td>{{ $coach?->squad?->squad_name }}
-                                        <td>Edit</td>
+                                        <td>
+                                            {{-- check for admin --}}
+                                            @if (auth()->user()->role_id==1)
+                                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#update{{ $coach->id }}">Update</a>
+                                            <a href="{{ URL::TO("admin/handle-delete-coach") }}/{{ $coach->id }}" class="btn btn-danger">Delete</a>
+                                            @endif
+
+                                        </td>
                                     </tr>
                                 @php $x++ @endphp
                                 @endforeach
@@ -104,6 +111,42 @@
     
         </div>
     </div>
-  </div>
+</div>
+
+@foreach ($coaches as $coach )
+
+ <div class="modal" id="update{{ $coach->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+        <!-- Modal Header -->
+            <div class="modal-header">
+            <h4 class="modal-title">Update a coach</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="{{ URL::TO("admin/handle-update-coach") }}" method="post">
+                @csrf
+                    <input type="hidden" name="user_id" value="{{ $coach->id }}" />
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" value="{{ $coach->name }}" name="name" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit </button>
+                </form>
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+@endforeach
 @endsection
 

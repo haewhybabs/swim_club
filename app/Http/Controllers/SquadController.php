@@ -27,9 +27,21 @@ class SquadController extends Controller
         $userId = auth()->user()->id;
         $squadId = $request->squad_id;
         $swimmer = $this->swimmerService->findByUserId($userId);
+
+        $coach = auth()->user()->role_id ==2?true:false;
+
+        $parent = auth()->user()->role_id ==4?true:false;
+        
+        // $isSwimmer =auth()->user()->role_id ==3?true:false;
         $squadSwimmers = $this->swimmerService->findBySquadId($swimmer?->squad_id);
 
-        $coach = $request->coach;
+        if($parent){
+            $swimmer = $this->swimmerService->findByParentId($userId);
+            $userId= $swimmer->user_id;
+            $squadId = $swimmer->squad_id;
+        }
+        
+       
         if($coach){
             $coachSquad = $this->squadService->findByCoachId($userId);
             $squadId = $coachSquad->id;
@@ -37,7 +49,8 @@ class SquadController extends Controller
 
         if($squadId){
             $squadSwimmers = $this->swimmerService->findBySquadId($squadId);
-            $swimmer = $squadSwimmers[0];
+            
+            $swimmer = count($squadSwimmers)>0?$squadSwimmers[0]:null;
         }
 
         return view('user.my_squad',compact('swimmer','squadSwimmers'));

@@ -27,8 +27,6 @@ class GalaEventController extends Controller
     {
         $validatedData = $request->validate([
             'name'=>'required',
-            'distance_id'=>'required',
-            'stroke_id'=>'required',
             'gender'=>'required',
             'gala_date'=>'required',
             'race_type'=>'required'

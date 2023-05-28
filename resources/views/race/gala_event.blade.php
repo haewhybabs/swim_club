@@ -12,8 +12,11 @@
         <div class="page-header float-right">
             <div class="page-title">
                 <ol class="breadcrumb text-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                       Create Gala Event
+                    @php $roleId = auth()->user()->role_id @endphp
+                    @if($roleId==1)
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Create Gala Event
+                    @endif
                     </button>
                 </ol>
             </div>
@@ -36,8 +39,8 @@
                                     <th>S/N</th>
                                     <th>Name</th>
                                     <th>Gala date</th>
-                                    <th>Distance</th>
-                                    <th>Stroke</th>
+                                    {{-- <th>Distance</th>
+                                    <th>Stroke</th> --}}
                                     <th>Gender</th>
                                 </tr>
                             </thead>
@@ -48,8 +51,8 @@
                                         <td>{{ $x}}</td>
                                         <td>{{ $event->name }}</td>
                                         <td>{{ $event->gala_date }}</td> 
-                                        <td>{{ $event->distance->name }}</td>
-                                        <td>{{ $event->stroke->name }}</td>
+                                        {{-- <td>{{ $event->distance->name }}</td>
+                                        <td>{{ $event->stroke->name }}</td> --}}
                                         <td>{{ $event->gender }}</td>
                                     </tr>
                                 @php $x++ @endphp
@@ -89,7 +92,7 @@
                         <input type="datetime-local" name="gala_date" class="form-control" required/>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Select Stroke</label>
                         <select class="form-control" name="stroke_id" required>
                             @foreach($strokes as $stroke)
@@ -105,7 +108,7 @@
                                 <option value="{{ $distance->id }}">{{ $distance->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label>Age group</label>

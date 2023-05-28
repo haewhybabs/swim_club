@@ -40,14 +40,7 @@
                             <a href="{{ URL::TO("dashboard") }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                         </li>
                         <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
-                        <li class="menu-item-has-children dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Personal Information</a>
-                            <ul class="sub-menu children dropdown-menu">
-                                <li><i class="fa fa-puzzle-piece"></i><a href="{{ URL::TO("load-info") }}">Update Info</a></li>
-                                <li><i class="fa fa-id-badge"></i><a href="{{ URL::TO("my-squad") }}">My squad</a></li>
-                                <li><i class="fa fa-share-square-o"></i><a href="{{ URL::TO("my-parent") }}">Parent</a></li>
-                            </ul>
-                        </li>
+                        
                         <li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Parent</a>
                             <ul class="sub-menu children dropdown-menu">
@@ -75,7 +68,7 @@
                         </li>
 
                         <li class="menu-item">
-                            <a href="{{ URL::TO('admin/gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
+                            <a href="{{ URL::TO('gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
                             
                         </li>
                         <li class="menu-item">
@@ -94,14 +87,14 @@
                         </li>
                         <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
                         <li class="menu-item">
-                            <a href="{{ URL::TO('my-squad') }}?coach=true"> <i class="menu-icon fa fa-table"></i>My Squad</a>
+                            <a href="{{ URL::TO('my-squad') }}"> <i class="menu-icon fa fa-table"></i>My Squad</a>
                         </li>
                         <li class="menu-item">
-                            <a href="{{ URL::TO('race-performance') }}?coach=true"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                            <a href="{{ URL::TO('race-performance') }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
                         </li>
 
                         <li class="menu-item">
-                            <a href="{{ URL::TO('admin/gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
+                            <a href="{{ URL::TO('gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
                             
                         </li>
                         <li class="menu-item">
@@ -137,6 +130,11 @@
                         </li>
 
                         <li class="menu-item">
+                            <a href="{{ URL::TO('gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
+                            
+                        </li>
+
+                        <li class="menu-item">
                             <a href="{{ URL::TO("logout") }}"> <i class="menu-icon fa fa-table"></i>Logout</a>
                         </li>
 
@@ -152,19 +150,24 @@
                     <h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
 
                     <li class="menu-item">
-                        <a href="{{ URL::TO('load-info') }}?parent=true"> <i class="menu-icon fa fa-table"></i>Child Info</a>
+                        <a href="{{ URL::TO('load-info') }}"> <i class="menu-icon fa fa-table"></i>Child Info</a>
                     </li>
                     <li class="menu-item">
-                        <a href="{{ URL::TO('my-parent') }}?parent=true"> <i class="menu-icon fa fa-table"></i>Parent Info</a>
+                        <a href="{{ URL::TO('my-parent') }}"> <i class="menu-icon fa fa-table"></i>Parent Info</a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="{{ URL::TO('my-squad') }}?parent={{ true }}"> <i class="menu-icon fa fa-table"></i>Child Squad</a>
+                        <a href="{{ URL::TO('my-squad') }}"> <i class="menu-icon fa fa-table"></i>Child Squad</a>
                     </li>
 
             
                     <li class="menu-item">
-                        <a href="{{ URL::TO('race-performance') }}?parent={{ true }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                        <a href="{{ URL::TO('race-performance') }}"> <i class="menu-icon fa fa-table"></i>Race Performance</a>
+                        
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="{{ URL::TO('gala-event') }}"> <i class="menu-icon fa fa-table"></i>Gala Event</a>
                         
                     </li>
 

@@ -50,6 +50,10 @@ class SwimmerService
         return $this->swimmerRepository->updateParentId($parentId,$id);
     }
 
+    public function updateByUserId($attributes,$userId){
+        return $this->swimmerRepository->updateByUserId($attributes,$userId);
+    }
+
     public function findSwimmersWithoutParent(){
         
         return $this->swimmerRepository->findSwimmersWithoutParent();

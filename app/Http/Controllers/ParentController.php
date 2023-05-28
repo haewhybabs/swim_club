@@ -16,8 +16,13 @@ class ParentController extends Controller
         $this->swimmerService = $swimmerService;
         $this->userService = $userService;
     }
-    public function myParent(){
+    public function myParent(Request $request){
         $userId = auth()->user()->id;
+        $parent = auth()->user()->role_id ==4?true:false;
+        if($parent){
+            $swimmer = $this->swimmerService->findByParentId($userId);
+            $userId= $swimmer->user_id;
+        }
         $swimmer = $this->swimmerService->findByUserId($userId);
         return view('user.my_parent',compact("swimmer"));
     }

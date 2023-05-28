@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Squad;
 use App\Services\SwimmerService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-
 class CoachController extends Controller
 {
     protected $swimmerService;
@@ -31,6 +31,30 @@ class CoachController extends Controller
         $coach = $this->userService->create($validatedData);
         if($coach){
             return redirect()->back()->with(['alert-type'=>'success','message'=>'A new coach has been successfully created. The account can now be accessed']);
+        }
+    }
+
+    public function updateCoach(Request $request){
+        $validatedData = $request->validate([
+            'name'=>'required'
+        ]);
+        $userId = $request->user_id;
+        $coach = $this->userService->updateUser($validatedData,$userId);
+        if($coach){
+            return redirect()->back()->with(['alert-type'=>'success','message'=>'Coach has been successfully updated']);
+        }
+
+    }
+
+    public function deleteCoach($id){
+        //set the squad to null before attempting delete
+        $squad = Squad::where('coach_id',$id)->first();
+        $squad->coach_id= null;
+        $squad->update();
+
+        $coach = $this->userService->deleteUser($id);
+        if($coach){
+            return redirect()->back()->with(['alert-type'=>'success','message'=>'Coach has been successfully deleted']);
         }
     }
     //
